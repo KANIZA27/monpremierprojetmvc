@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/apropos.css" rel="stylesheet"> <!-- Lien vers le fichier CSS externe -->
+    <title>Chaîne TV - À propos</title>
+</head>
+<body>
+<main>
+    <%- include('navbar') %> <!-- Inclut la barre de navigation depuis un fichier partiel -->
+    <h1>À propos de nous</h1>
+    <p>Voici l'équipe de notre chaîne TV :</p>
+
+    <!-- Liste dynamique des membres de l'équipe -->
+    <ul class="team-list">
+        <% equipe.forEach(member => { %> <!-- Boucle pour afficher chaque membre -->
+            <li>
+                <span><%= member.nom %> - <%= member.poste %></span> <!-- Affiche le nom et le poste du membre -->
+            </li>
+        <% }); %>
+    </ul>
+</main>
+
+<!-- Pied de page -->
+<footer>
+    <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p>
+    <%- include("footer") -%> <!-- Inclut le pied de page depuis un fichier partiel -->
+</footer>
+</body>
+</html>

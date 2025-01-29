@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/programmeTv.css" rel="stylesheet"> <!-- Lien vers le fichier CSS externe -->
+    <title>chaîne TV</title>
+</head>
+
+<body>
+  <main>
+    <%- include('navbar') %>
+<h1>Programme TV</h1>
+<p>Découvrez nos programmes culturels.</p>
+<!-- Liste des programmes à ajouter dynamiquement -->
+<ul>
+  <% programmes.forEach(programme => { %>
+    <li><%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %></li>
+  <% }) %>
+</ul>
+<%- include('footer') %>
+
+</main>
+<!-- Pied de page -->
+<footer>
+  <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p>
+  <%- include("footer") -%> <!-- Inclut le pied de page depuis un fichier partiel -->
+</footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Définit l'encodage des caractères pour éviter les problèmes avec les accents -->
+    <meta charset="UTF-8"> 
+    
+    <!-- Permet une adaptation responsive sur mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+    <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    <title>Chaîne TV</title> 
+    <link rel="stylesheet" href="/css/formulaireProgrammeTv.css"> <!-- Lien vers le fichier CSS externe -->
+</head>
+
+<body>
+   <main>
+    <!-- Inclusion de la barre de navigation via un template (probablement avec EJS) -->
+    <%- include('navbar') %> 
+
+    <!-- Titre principal de la page -->
+    <h1>Ajouter un programme TV</h1> 
+
+    <!-- Formulaire pour ajouter un programme TV -->
+    <form action="/programmeTv" method="POST"> 
+        <!-- Champ pour entrer le titre du programme -->
+        <label for="titre">Titre :</label>
+        <input type="text" id="titre" name="titre" required> <!-- Champ texte obligatoire pour le titre -->
+
+        <!-- Champ pour entrer l'heure de début -->
+        <label for="heure_debut">Heure de début :</label>
+        <input type="time" id="heure_debut" name="heure_debut" required> <!-- Champ pour l'heure de début (format HH:MM) -->
+
+        <!-- Champ pour entrer l'heure de fin -->
+        <label for="heure_fin">Heure de fin :</label>
+        <input type="time" id="heure_fin" name="heure_fin" required> <!-- Champ pour l'heure de fin (format HH:MM) -->
+
+        <!-- Bouton pour soumettre le formulaire -->
+        <button type="submit">Envoyer</button>
+    </form>
+   </main> 
+
+   <!-- Pied de page -->
+   <footer>
+       <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p> <!-- Copyright de la chaîne TV -->
+   </footer>
+
+   <!-- Inclusion du pied de page via un template -->
+   <%- include('footer') %> 
+</body>
+</html>
