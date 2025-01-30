@@ -5,7 +5,9 @@
     <meta charset="UTF-8"> 
     
     <!-- Permet une adaptation responsive sur mobile -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/formulaireProgrammeTVcss">
+
     
     <!-- Titre de la page affiché dans l'onglet du navigateur -->
     <title>Chaîne TV</title> 
@@ -18,10 +20,10 @@
     <%- include('navbar') %> 
 
     <!-- Titre principal de la page -->
-    <h1>Ajouter un programme TV</h1> 
+    <h1>Ajouter formulaireProgrammeTV</h1> 
 
     <!-- Formulaire pour ajouter un programme TV -->
-    <form action="/programmeTv" method="POST"> 
+    <form action="/formulaireProgrammeTv" method="POST"> 
         <!-- Champ pour entrer le titre du programme -->
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre" required> <!-- Champ texte obligatoire pour le titre -->

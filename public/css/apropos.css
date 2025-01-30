@@ -35,7 +35,7 @@ main {
   }
   
   ul li {
-    background: rgb(53, 82, 41);
+    background: rgb(41, 76, 82);
     margin: 0.5em auto;
     padding: 1em;
     border-radius: 5px;
@@ -45,8 +45,9 @@ main {
   }
   
   footer {
+    background-color:#333333;
     text-align: center;
-    margin: 2em 0;
-    color: #666;
+    margin: 10px;
+    color:black;
   }
   

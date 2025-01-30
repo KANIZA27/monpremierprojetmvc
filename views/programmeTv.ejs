@@ -10,21 +10,16 @@
 <body>
   <main>
     <%- include('navbar') %>
-<h1>Programme TV</h1>
-<p>Découvrez nos programmes culturels.</p>
-<!-- Liste des programmes à ajouter dynamiquement -->
-<ul>
-  <% programmes.forEach(programme => { %>
-    <li><%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %></li>
-  <% }) %>
-</ul>
-<%- include('footer') %>
-
+    <h1>Programme TV</h1>
+    <p>Découvrez nos programmes culturels.</p>
+    <!-- Liste des programmes à ajouter dynamiquement -->
+    <ul>
+      <% programmediffusion.forEach(programme => { %>
+        <li><%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %></li>
+      <% }) %>
+    </ul>
+    <%- include('footer') %> <!-- Inclusion unique du footer -->
 </main>
-<!-- Pied de page -->
-<footer>
-  <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p>
-  <%- include("footer") -%> <!-- Inclut le pied de page depuis un fichier partiel -->
-</footer>
+
 </body>
 </html>

@@ -54,20 +54,61 @@ app.get("/apropos", (req, res) => {
   });
 });
 
-// Route pour afficher le formulaire d'ajout de programme TV
-app.get("/programmeTv", (req, res) => {
-  const programmes = [
-    { titre: 'Chigoma', heure_debut: '14:00:00', heure_fin: '15:00:00' },
-    { titre: 'Débat', heure_debut: '16:00:00', heure_fin: '17:30:00' },
-    { titre: 'Mazaraka', heure_debut: '18:00:00', heure_fin: '19:00:00' },
-    { titre: 'Chants', heure_debut: '20:00:00', heure_fin: '21:00:00' },
-    { titre: 'Documentaire', heure_debut: '22:00:00', heure_fin: '23:30:00' }
-  ];
 
-  res.render("programmeTv", { programmes }); // Rendu correct de la vue avec les programmes
+  // Route pour afficher le formulaire d'ajout de programme TV
+app.get("/programmeTv", (req, res) => {
+  req.getConnection((erreur, connection) => {
+    if (erreur) {
+      console.log("Erreur de connexion à la base de données:", erreur);
+       // Ajout d'une gestion d'erreur côté client
+    }
+
+    // Exécution de la requête SQL
+    connection.query("SELECT * FROM programmediffusion", [], (err, resultat) => {
+      if (err) {
+        console.log("Erreur lors de l'exécution de la requête :", err);
+   // Gestion d'erreur côté client
+      }
+      
+      console.log("Résultat :", resultat); // Affichage correct des résultats dans la console
+      res.render("programmeTv", { programmediffusion: resultat }); // Rendu de la vue avec les données récupérées
+    });
+  });
 });
 
-app.get("/formulaire")
+// Route pour afficher le formulaire d'ajout de programme TV
+app.get("/formulaireProgrammeTv", (req, res) => {
+  res.render("formulaireProgrammeTv"); // Affiche le formulaire d'ajout
+});
+
+// Route pour gérer l'ajout d'un programme TV
+app.post("/formulaireProgrammeTv", (req, res) => {
+  const { titre, heure_debut, heure_fin } = req.body;
+
+  if (!titre || !heure_debut || !heure_fin) {
+    return res.status(400).send("Tous les champs sont obligatoires");
+  }
+
+  req.getConnection((err, connection) => {
+    if (err) {
+      console.log("Erreur de connexion à la base de données :", err);
+      return res.status(500).send("Erreur de connexion à la base de données");
+    }
+
+    // Insertion du programme dans la base de données
+    const query = "INSERT INTO programmediffusion (titre, heure_debut, heure_fin) VALUES (?, ?, ?)";
+    connection.query(query, [titre, heure_debut, heure_fin], (err, result) => {
+      if (err) {
+        console.log("Erreur lors de l'insertion des données :", err);
+        return res.status(500).send("Erreur lors de l'insertion des données");
+      }
+
+      res.redirect("/programmeTv"); // Redirection vers la liste des programmes après ajout
+    });
+  });
+});
+
+
 
 // Exportation de l'application pour utilisation dans d'autres fichiers
 module.exports = app;

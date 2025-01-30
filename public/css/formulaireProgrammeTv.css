@@ -1,52 +1,79 @@
+/* Styles généraux */
+nav {
+  background-color: #333;
+  padding: 1em;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Conteneur principal */
 main {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  
-  nav {
-    background-color: #333;
-    padding: 1em;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav a {
-    color: black;
-    text-decoration: none;
-  }
-  
-  h1 {
-    color: #333;
-    text-align: center;
-    margin: 1em 0;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  ul li {
-    background: rgb(53, 82, 41);
-    margin: 0.5em auto;
-    padding: 1em;
-    border-radius: 5px;
-    width: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  footer {
-    text-align: center;
-    margin: 2em 0;
-    color: #666;
-  }
-  
+  width: 50%;
+  background: #fff;
+  padding: 20px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Formulaire */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+label {
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+/* Champs du formulaire */
+input[type="text"],
+input[type="time"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Bouton de soumission */
+button {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  background: #011113;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background:black;
+}
+
+/* Pied de page */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background: #333;
+  color: white;
+  width: 100%;
+}
