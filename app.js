@@ -92,18 +92,16 @@ app.post("/formulaireProgrammeTv", (req, res) => {
   req.getConnection((err, connection) => {
     if (err) {
       console.log("Erreur de connexion à la base de données :", err);
-      return res.status(500).send("Erreur de connexion à la base de données");
+  
     }
-
     // Insertion du programme dans la base de données
     const query = "INSERT INTO programmediffusion (titre, heure_debut, heure_fin) VALUES (?, ?, ?)";
     connection.query(query, [titre, heure_debut, heure_fin], (err, result) => {
       if (err) {
         console.log("Erreur lors de l'insertion des données :", err);
-        return res.status(500).send("Erreur lors de l'insertion des données");
       }
 
-      res.redirect("/programmeTv"); // Redirection vers la liste des programmes après ajout
+      res.render("/programmeTv"); // Redirection vers la liste des programmes après ajout
     });
   });
 });

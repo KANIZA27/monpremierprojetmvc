@@ -14,6 +14,7 @@
     <p>Découvrez nos programmes culturels.</p>
     <!-- Liste des programmes à ajouter dynamiquement -->
     <ul>
+      <img src="images/phototv.jpg" alt="phototv" class="phototv-images">
       <% programmediffusion.forEach(programme => { %>
         <li><%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %></li>
       <% }) %>
