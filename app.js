@@ -36,79 +36,61 @@ app.use(express.static("public"));
 
 // Route pour afficher la page "À propos"
 app.get("/apropos", (req, res) => {
-  req.getConnection((erreur, connection) => {
+  req.getConnection((erreur, connection) => { // Établir une connexion à la base de données
     if (erreur) {
-      console.log("Erreur de connexion à la base de données:", erreur);
+      console.log("Erreur de connexion à la base de données:", erreur); // Affichage de l'erreur en cas d'échec de connexion
     } else {
-
-    }
-    connection.query("SELECT * FROM equipe", [], (err, resultat) => {
-      if (err) {
-        console.log("Erreur lors de l'exécution de la requête :", err);
-      } else {
-
-      }
-      console.log("Résultat :", resultat);
-      res.render("apropos", { equipe: resultat }); // Envoi des données à la vue
-    });
-  });
-});
-
-
-  // Route pour afficher le formulaire d'ajout de programme TV
-app.get("/programmeTv", (req, res) => {
-  req.getConnection((erreur, connection) => {
-    if (erreur) {
-      console.log("Erreur de connexion à la base de données:", erreur);
-       // Ajout d'une gestion d'erreur côté client
-    }
-
-    // Exécution de la requête SQL
-    connection.query("SELECT * FROM programmediffusion", [], (err, resultat) => {
-      if (err) {
-        console.log("Erreur lors de l'exécution de la requête :", err);
-   // Gestion d'erreur côté client
-      }
       
-      console.log("Résultat :", resultat); // Affichage correct des résultats dans la console
-      res.render("programmeTv", { programmediffusion: resultat }); // Rendu de la vue avec les données récupérées
+    }
+    connection.query("SELECT * FROM equipe", [], (err, resultat) => { // Exécution de la requête SQL pour récupérer les données de l'équipe
+      if (err) {
+        console.log("Erreur lors de l'exécution de la requête :", err); // Affichage de l'erreur en cas d'échec de la requête
+      } else {
+        
+      }
+      console.log("Résultat :", resultat); // Affichage des résultats obtenus dans la console
+      res.render("apropos", { equipe: resultat }); // Envoi des données à la vue pour affichage
     });
   });
 });
 
 // Route pour afficher le formulaire d'ajout de programme TV
-app.get("/formulaireProgrammeTv", (req, res) => {
-  res.render("formulaireProgrammeTv"); // Affiche le formulaire d'ajout
+app.get("/programmeTv", (req, res) => {
+  req.getConnection((erreur, connection) => { // Établir une connexion à la base de données
+    if (erreur) {
+      console.log("Erreur de connexion à la base de données:", erreur); // Affichage de l'erreur en cas d'échec de connexion
+       // Ajout d'une gestion d'erreur côté client
+    }
+
+    // Exécution de la requête SQL pour récupérer les programmes de diffusion
+    connection.query("SELECT * FROM programmediffusion", [], (err, resultat) => {
+      if (err) {
+        console.log("Erreur lors de l'exécution de la requête :", err); // Affichage de l'erreur en cas d'échec de la requête
+   // Gestion d'erreur côté client
+      }
+      
+      console.log("Résultat :", resultat); // Affichage des résultats obtenus dans la console
+      res.render("programmeTv", { programmediffusion: resultat }); // Envoi des données à la vue pour affichage
+    });
+  });
 });
 
 // Route pour gérer l'ajout d'un programme TV
 app.post("/formulaireProgrammeTv", (req, res) => {
-  const { titre, heure_debut, heure_fin } = req.body;
-
-  if (!titre || !heure_debut || !heure_fin) {
-    return res.status(400).send("Tous les champs sont obligatoires");
-  }
-
-  req.getConnection((err, connection) => {
+  req.getConnection((err, connection) => { // Établir une connexion à la base de données
     if (err) {
-      console.log("Erreur de connexion à la base de données :", err);
-  
+      console.log("Erreur de connexion à la base de données :", err); // Affichage de l'erreur en cas d'échec de connexion
     }
     // Insertion du programme dans la base de données
     const query = "INSERT INTO programmediffusion (titre, heure_debut, heure_fin) VALUES (?, ?, ?)";
-    connection.query(query, [titre, heure_debut, heure_fin], (err, result) => {
+    connection.query(query, [titre, heure_debut, heure_fin], (err, result) => { // Exécution de la requête d'insertion
       if (err) {
-        console.log("Erreur lors de l'insertion des données :", err);
+        console.log("Erreur lors de l'insertion des données :", err); // Affichage de l'erreur en cas d'échec de l'insertion
       }
-
       res.render("/programmeTv"); // Redirection vers la liste des programmes après ajout
     });
   });
 });
 
-
-
 // Exportation de l'application pour utilisation dans d'autres fichiers
 module.exports = app;
-
-
