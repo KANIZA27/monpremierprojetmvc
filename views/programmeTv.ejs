@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/programmeTv.css" rel="stylesheet"> <!-- Lien vers le fichier CSS externe -->
-    <title>chaîne TV</title>
+    <meta charset="UTF-8"> <!-- Définition de l'encodage des caractères pour supporter les caractères spéciaux -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Permet l'adaptabilité sur les différents écrans -->
+    <link href="css/programmeTv.css" rel="stylesheet"> <!-- Lien vers le fichier CSS externe pour le style -->
+    <title>chaîne TV</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
 </head>
 
 <body>
   <main>
-    <%- include('navbar') %>
-    <h1>Programme TV</h1>
-    <p>Découvrez nos programmes culturels.</p>
+    <%- include('navbar') %> <!-- Inclusion de la barre de navigation -->
+    <h1>Programme TV</h1> <!-- Titre principal de la page -->
+    <p>Découvrez nos programmes culturels.</p> <!-- Description de la page -->
     <!-- Liste des programmes à ajouter dynamiquement -->
     <ul>
-      <img src="images/phototv.jpg" alt="phototv" class="phototv-images">
-      <% programmediffusion.forEach(programme => { %>
-        <li><%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %></li>
+      <img src="" alt="" class=""> <!-- Image illustrative du programme TV -->
+      <% programmediffusion.forEach(programme => { %> <!-- Boucle pour afficher dynamiquement les programmes TV -->
+        <iframe width="560" height="315" 
+          src="https://www.youtube.com/embed/DqwI5WsAsn8?enablejsapi=1" >
+        </iframe>
+
+        <li><%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %></li> <!-- Affichage des détails de chaque programme -->
       <% }) %>
     </ul>
     <%- include('footer') %> <!-- Inclusion unique du footer -->

@@ -6,7 +6,7 @@ main {
   }
   
   nav {
-    background-color: #333;
+    background-color:black;
     padding: 1em;
   }
   
@@ -19,7 +19,7 @@ main {
   }
   
   nav a {
-    color: black;
+    color: white;
     text-decoration: none;
   }
   
@@ -35,7 +35,7 @@ main {
   }
   
   ul li {
-    background: rgb(53, 82, 41);
+    background: white(53, 82, 41);
     margin: 0.5em auto;
     padding: 1em;
     border-radius: 5px;

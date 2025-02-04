@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
-    <!-- Définit l'encodage des caractères pour éviter les problèmes avec les accents -->
     <meta charset="UTF-8"> 
-    
-    <!-- Permet une adaptation responsive sur mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/formulaireProgrammeTV.css"> <!-- Lien vers le fichier CSS externe -->
-
-    <!-- Titre de la page affiché dans l'onglet du navigateur -->
-    <title>Chaîne TV</title>  
+    <link rel="stylesheet" href="/css/formulaireProgrammeTV.css">
+    <title>Ajouter un Programme TV</title>  
 </head>
 
 <body>
    <main>
-    <!-- Inclusion de la barre de navigation via un template (probablement avec EJS) -->
-    <%- include('navbar') %> 
+    <%- include('navbar') %> <!-- Inclusion de la barre de navigation -->
+    
+    <h1>Ajouter un Programme TV</h1> 
 
-    <!-- Titre principal de la page -->
-    <h1>Ajouter formulaireProgrammeTV</h1> 
-
-    <!-- Formulaire pour ajouter un programme TV -->
     <form action="/formulaireProgrammeTv" method="POST"> 
-        <!-- Champ pour entrer le titre du programme -->
         <label for="titre">Titre :</label>
-        <input type="text" id="titre" name="titre" required> <!-- Champ texte obligatoire pour le titre -->
+        <input type="text" id="titre" name="titre" required> 
 
-        <!-- Champ pour entrer l'heure de début -->
         <label for="heure_debut">Heure de début :</label>
-        <input type="time" id="heure_debut" name="heure_debut" required> <!-- Champ pour l'heure de début (format HH:MM) -->
+        <input type="time" id="heure_debut" name="heure_debut" required> 
 
-        <!-- Champ pour entrer l'heure de fin -->
         <label for="heure_fin">Heure de fin :</label>
-        <input type="time" id="heure_fin" name="heure_fin" required> <!-- Champ pour l'heure de fin (format HH:MM) -->
+        <input type="time" id="heure_fin" name="heure_fin" required> 
 
-        <!-- Bouton pour soumettre le formulaire -->
+        <label for="video">Lien Vidéo :</label>
+        <input type="url" id="video" name="video" placeholder="https://www.youtube.com/embed/DqwI5WsAsn8?enablejsapi=1" required>
+
         <button type="submit">Envoyer</button>
     </form>
    </main> 
-
-   <!-- Pied de page -->
+   <%- include('footer') %> <!-- Inclusion du pied de page -->
    <footer>
-       <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p> <!-- Copyright de la chaîne TV -->
+       <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p> 
    </footer>
-
-   <!-- Inclusion du pied de page via un template -->
-   <%- include('footer') %> 
 </body>
+
+<script>
+    function rempliDonnees(id,titre, heure_debut, heure_fin, lien_youtube){
+        document.querySelector("#id").valeue = id;
+        document.querySelector("#titre").valeue = titre;
+        document.querySelector("#heure_debut").valeue = heure_debut;
+        document.querySelector("#heure_fin").valeue = heure_fin;
+        document.querySelector("#lien_youtube").valeue = lien_youtube;
+
+
+    }
+</script>
 </html>

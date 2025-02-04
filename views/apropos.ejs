@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/apropos.css" rel="stylesheet"> <!-- Lien vers le fichier CSS externe -->
-    <title>Chaîne TV - À propos</title>
+    <meta charset="UTF-8"> <!-- Définition du jeu de caractères pour supporter les accents -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptation pour les mobiles -->
+    <link href="/css/apropos.css" rel="stylesheet"> <!-- Lien vers le fichier CSS externe -->
+    <title>Chaîne TV - À propos</title> <!-- Titre de la page -->
 </head>
 <body>
-<main>
-    <%- include('navbar') %> <!-- Inclut la barre de navigation depuis un fichier partiel -->
-    <h1>À propos de nous</h1>
-    <p>Voici l'équipe de notre chaîne TV :</p>
+    <%- include('navbar') %> <!-- Inclusion de la barre de navigation depuis un fichier partiel -->
 
-    <!-- Liste dynamique des membres de l'équipe -->
-    <ul class="team-list">
-        
-        <% equipe.forEach(member => { %> <!-- Boucle pour afficher chaque membre -->
-            <li>
-                <span><%= member.nom %> - <%= member.poste %></span>  <!-- Affiche le nom et le poste du membre -->
-            </li>
-        <% }); %>
-    </ul>
+<main>
+    <h1>À propos de nous</h1> <!-- Titre principal -->
+    <p>Voici l'équipe de notre chaîne TV :</p> <!-- Paragraphe introductif -->
+
+    <div class="team-container"> <!-- Conteneur global pour toutes les cartes -->
+
+        <% equipe.forEach(member => { %> <!-- Boucle EJS pour parcourir la liste des membres -->
+            <div class="flip-card"> <!-- Carte individuelle avec effet flip -->
+                <div class="flip-card-inner"> <!-- Structure interne de la carte avec 2 faces -->
+
+                    <!-- Face avant : Image du membre -->
+                    <div class="flip-card-front">
+                        <img src="images/directrice.jpg " alt="Photo de <%= member.nom %>">
+                    </div>
+
+                    <!-- Face arrière : Informations du membre -->
+                    <div class="flip-card-back">
+                        <h3><%= member.nom %></h3> <!-- Nom du membre -->
+                        <p><%= member.poste %></p> <!-- Poste du membre -->
+                    </div>
+
+                </div>
+            </div>
+        <% }); %> <!-- Fin de la boucle EJS -->
+
+    </div> <!-- Fin du conteneur team-container -->
 </main>
 
 <!-- Pied de page -->
+<%- include('footer') %> <!-- Inclusion du pied de page -->
 <footer>
-    <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p>
-    <%- include("footer") -%> <!-- Inclut le pied de page depuis un fichier partiel -->
+    <p>&copy; 2025 Chaîne TV - Tous droits réservés.</p> <!-- Copyright -->
 </footer>
+
 </body>
 </html>
