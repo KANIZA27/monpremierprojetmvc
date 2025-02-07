@@ -150,3 +150,21 @@ Les programmediffusion
 Ajouter une colonne
 
 ALTER TABLE programmediffusion ADD lien_youtube VARCHAR(100);
+
+
+
+CREATE TABLE utilisateur (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(155) NOT NULL,
+    prenom VARCHAR(155) NOT NULL,
+    email VARCHAR(155) NOT NULL UNIQUE,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    date_naissance DATE
+);
+
+INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, date_naissance) 
+VALUES 
+('Dupont', 'Jean', 'jean.dupont@email.com', 'jeanpasse123', '1990-05-15'),
+('Martin', 'Sophie', 'sophie.martin@email.com', 'sophiepasse456', '1985-10-23'),
+('Durand', 'Paul', 'paul.durand@email.com', 'paulpasse789', '2000-07-09'),
+('Bacar', 'Moussa', 'moussa.bacar@email.com', 'moussapasse789', '2000-07-09');

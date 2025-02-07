@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="/css/signup.css"> <!-- Lien vers le CSS -->
+</head>
+<body>
+    <main>
+        <h2>Inscription</h2>
+        <p>Déjà un compte ? <a href="/login">Se connecter</a></p> <!-- Lien vers connexion -->
+    
+        <!-- Formulaire d'inscription -->
+        <form action="/signup" method="POST">
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" required> <!-- Champ Nom -->
+    
+            <label for="prenom">Prénom :</label>
+            <input type="text" name="prenom" required> <!-- Champ Prénom -->
+    
+            <label for="email">Email :</label>
+            <input type="email" name="email" required> <!-- Champ Email -->
+    
+            <label for="dob">Date de naissance :</label>
+            <input type="date" name="dob" required> <!-- Champ Date de naissance -->
+    
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" required> <!-- Champ Mot de passe -->
+    
+            <button type="submit">S'inscrire</button> <!-- Bouton Inscription -->
+        </form>
+    
+    </main>
+</body>
+</html>
+

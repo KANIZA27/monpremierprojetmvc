@@ -6,7 +6,23 @@ body {
   background-color: #f4f4f4; /* Fond gris clair */
   text-align: center; /* Alignement du texte */
 }
+nav {
+  background-color:black;
+  padding: 1em;
+}
 
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
 /* ✅ Conteneur principal de l'équipe */
 .team-container {
   display: flex; /* Affichage en ligne */

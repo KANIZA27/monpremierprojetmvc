@@ -31,6 +31,8 @@ app.use(express.urlencoded({extended: false}));
 // Configuration d'Express pour utiliser EJS comme moteur de vues
 app.set("views", "./views"); // Définit le dossier des vues
 app.set("view engine", "ejs"); // Définit le moteur de rendu sur EJS
+// Middleware pour parser les données des formulaires
+app.use(express.urlencoded({ extended: true }));
 
 // Middleware pour servir des fichiers statiques (comme les images, CSS, JS) depuis le dossier 'public'
 app.use(express.static("public"));
@@ -78,6 +80,11 @@ app.get("/programmeTv", (req, res) => {
   });
 });
 
+
+app.get("/formulaireProgrammeTv", (req, res) => {
+  res.render("formulaireProgrammeTv");
+});
+
 // Route pour afficher le formulaire d'ajout de programme TV
 // Route pour gérer l'ajout d'unformulaire programme TV
 app.post("/formulaireProgrammeTv", (req, res) => {
@@ -123,6 +130,73 @@ app.post("/formulaireProgrammeTv", (req, res) => {
       });
   });
 });
+
+
+app.get("/login", (req, res) => {
+  res.render("login"); // Il doit chercher 'views/login.ejs'
+});
+
+
+// Route POST pour gérer la connexion des utilisateurs
+app.post('/login', (req, res) => {
+  // Récupération des données envoyées par le formulaire de connexion (email et mot de passe)
+        const { email, password } = req.body;
+
+  // Requête SQL pour rechercher l'utilisateur correspondant à l'email fourni
+  connection.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
+      if (err) throw err; // En cas d'erreur SQL, on arrête l'exécution et affiche l'erreur
+
+      // Vérifier si un utilisateur correspondant à l'email a été trouvé
+      if (results.length > 0) {
+        const user = results[0]; // Récupération du premier utilisateur trouvé
+
+          // Comparaison du mot de passe saisi avec le mot de passe hashé stocké en base de données
+        const validPassword = await bcrypt.compare(password, user.password);
+
+          if (validPassword) {
+              // Si le mot de passe est valide, on stocke l'ID de l'utilisateur en session
+              req.session.userId = user.id;
+              
+              // Réponse envoyée à l'utilisateur indiquant une connexion réussie
+              res.send('Connexion réussie ! <a href="/dashboard">Accéder au dashboard</a>');
+          } else {
+              // Si le mot de passe est incorrect, on affiche un message d'erreur
+              res.send('Mot de passe incorrect.');
+          }
+      } else {
+          // Si aucun utilisateur n'est trouvé avec cet email, on affiche un message d'erreur
+          res.send('Email non trouvé.');
+      }
+  });
+});
+
+
+app.get("/signup", (req, res) => {
+    res.render("signup"); // Il doit chercher 'views/signup.ejs'
+});
+
+// Route POST pour gérer l'inscription des utilisateurs
+app.post('/signup', async (req, res) => {
+  // Récupération des données envoyées par le formulaire d'inscription
+      const { nom, prenom, email, date_naissance, mot_de_passe } = req.body;
+
+  // Hachage du mot de passe avant de le stocker en base de données pour des raisons de sécurité
+      const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
+
+  // Exécution de la requête SQL pour insérer un nouvel utilisateur dans la table `users`
+  connection.query(
+      'INSERT INTO users (nom, prenom, email, dob, password) VALUES (?, ?, ?, ?, ?)',
+      [nom, prenom, email, date_naissance, hashedPassword], // Les valeurs à insérer dans la requête SQL
+      (err, result) => {
+          if (err) throw err; // En cas d'erreur SQL, on affiche l'erreur et on arrête l'exécution
+
+          // Message de confirmation d'inscription avec un lien vers la page de connexion
+          res.send('Inscription réussie ! <a href="/login">Se connecter</a>');
+      }
+  );
+});
+
+
 
 // Exportation de l'application pour utilisation dans d'autres fichiers
 module.exports = app;

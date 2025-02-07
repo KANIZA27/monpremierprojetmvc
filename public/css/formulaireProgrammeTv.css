@@ -1,26 +1,36 @@
 /* Styles généraux */
-nav {
-  background-color: #333;
-  padding: 1em;
-}
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* Conteneur principal */
 main {
   width: 50%;
-  background: #fff;
+  margin: 40px auto;
+  background: white;
   padding: 20px;
-  margin: 50px auto;
-  border-radius: 10px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+nav {
+  background-color:black;
+  padding: 1em;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
 }
 
 /* Titre */
@@ -29,51 +39,53 @@ h1 {
   color: #333;
 }
 
-/* Formulaire */
+/* Style du formulaire */
 form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
 /* Labels */
 label {
-  margin: 10px 0 5px;
   font-weight: bold;
+  color: #555;
 }
 
-/* Champs du formulaire */
-input[type="text"],
-input[type="time"] {
+/* Champs de saisie */
+input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  width: 100%;
 }
 
-/* Bouton de soumission */
+/* Champ focus */
+input:focus {
+  border-color: black;
+  outline: none;
+}
+
+/* Bouton d'envoi */
 button {
-  margin-top: 15px;
+  background-color: black;
+  color: white;
   padding: 12px;
   border: none;
-  background: #011113;
-  color: white;
-  font-size: 16px;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
+/* Effet au survol du bouton */
 button:hover {
-  background:black;
+  background-color: black;
 }
 
-/* Pied de page */
-footer {
-  text-align: center;
-  margin-top: 20px;
-  padding: 10px;
-  background: #333;
-  color: white;
-  width: 100%;
+/* Responsive (mobile) */
+@media (max-width: 768px) {
+  main {
+      width: 90%;
+  }
 }

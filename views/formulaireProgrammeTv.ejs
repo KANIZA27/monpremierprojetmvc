@@ -13,7 +13,7 @@
     
     <h1>Ajouter un Programme TV</h1> 
 
-    <form action="/formulaireProgrammeTv" method="POST"> 
+    <form action="/formulaireProgrammeTv" method="POST">
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre" required> 
 
@@ -24,7 +24,7 @@
         <input type="time" id="heure_fin" name="heure_fin" required> 
 
         <label for="video">Lien Vidéo :</label>
-        <input type="url" id="video" name="video" placeholder="https://www.youtube.com/embed/DqwI5WsAsn8?enablejsapi=1" required>
+        <input type="url" id="video" name="video" placeholder="" required>
 
         <button type="submit">Envoyer</button>
     </form>
@@ -36,14 +36,12 @@
 </body>
 
 <script>
-    function rempliDonnees(id,titre, heure_debut, heure_fin, lien_youtube){
-        document.querySelector("#id").valeue = id;
-        document.querySelector("#titre").valeue = titre;
-        document.querySelector("#heure_debut").valeue = heure_debut;
-        document.querySelector("#heure_fin").valeue = heure_fin;
-        document.querySelector("#lien_youtube").valeue = lien_youtube;
+    function rempliDonnees(id, titre, heure_debut, heure_fin, lien_youtube) {
+    document.querySelector("#titre").value = titre;
+    document.querySelector("#heure_debut").value = heure_debut;
+    document.querySelector("#heure_fin").value = heure_fin;
+    document.querySelector("#video").value = lien_youtube;
+}
 
-
-    }
 </script>
 </html>
