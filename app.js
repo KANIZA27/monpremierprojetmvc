@@ -5,7 +5,18 @@ const url = require("url"); // Module URL pour manipuler les URL
 const fs = require("fs"); // Module FS pour gérer les fichiers
 const mysql2 = require("mysql2"); // Module pour se connecter à une base de données MySQL
 const myConnection = require("express-myconnection"); // Middleware pour gérer les connexions MySQL dans Express
+// Importe le module `express-myconnection` qui permet de gérer les connexions MySQL avec Express
 const connection = require("express-myconnection");
+
+// Importe le routeur `aproposRouter` depuis le fichier `routes/apropos.js`
+// Ce routeur gère les routes liées à la page "À propos"
+const aproposRouter = require("./routes/apropos");
+
+// Importe le routeur `programmeTvRouter` depuis le fichier `routes/programmeTv.js`
+// Ce routeur gère les routes liées à la page "Programme TV"
+const programmeTvRouter = require('./routes/programmeTv'); 
+const formulaireProgrammeTvRouter = require('./routes/formulaireProgrammeTv');
+
 
 
 
@@ -37,48 +48,6 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware pour servir des fichiers statiques (comme les images, CSS, JS) depuis le dossier 'public'
 app.use(express.static("public"));
 
-// Route pour afficher la page "À propos"
-app.get("/apropos", (req, res) => {
-  req.getConnection((erreur, connection) => {
-    if (erreur) {
-      console.log("Erreur de connexion à la base de données:", erreur);
-    } else {
-      connection.query("SELECT * FROM equipe", [], (err, resultat) => {
-      if (err) {
-        console.log("Erreur lors de l'exécution de la requête :", err);
-      } else {
-
-      }
-      console.log("Résultat :", resultat);
-      res.render("apropos", { equipe: resultat }); // Envoi des données à la vue
-    });
-
-    }
-    
-  });
-});
-
-
-  // Route pour afficher le formulaire d'ajout de programme TV
-app.get("/programmeTv", (req, res) => {
-  req.getConnection((erreur, connection) => {
-    if (erreur) {
-      console.log("Erreur de connexion à la base de données:", erreur);
-       // Ajout d'une gestion d'erreur côté client
-    }
-
-    // Exécution de la requête SQL
-    connection.query("SELECT * FROM programmediffusion", [], (err, resultat) => {
-      if (err) {
-        console.log("Erreur lors de l'exécution de la requête :", err);
-   // Gestion d'erreur côté client
-      }
-      
-      console.log("Résultat :", resultat); // Affichage correct des résultats dans la console
-      res.render("programmeTv", { programmediffusion: resultat }); // Rendu de la vue avec les données récupérées
-    });
-  });
-});
 
 
 app.get("/formulaireProgrammeTv", (req, res) => {
@@ -138,7 +107,7 @@ app.get("/login", (req, res) => {
 
 
 // Route POST pour gérer la connexion des utilisateurs
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   // Récupération des données envoyées par le formulaire de connexion (email et mot de passe)
         const { email, password } = req.body;
 
@@ -178,10 +147,10 @@ app.get("/signup", (req, res) => {
 // Route POST pour gérer l'inscription des utilisateurs
 app.post('/signup', async (req, res) => {
   // Récupération des données envoyées par le formulaire d'inscription
-      const { nom, prenom, email, date_naissance, mot_de_passe } = req.body;
+      const { nom, prenom, email, datenaissance, motdepasse } = req.body;
 
   // Hachage du mot de passe avant de le stocker en base de données pour des raisons de sécurité
-      const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
+      const hashedPassword = await bcrypt.hash(motdepasse, 10);
 
   // Exécution de la requête SQL pour insérer un nouvel utilisateur dans la table `users`
   connection.query(
@@ -196,6 +165,11 @@ app.post('/signup', async (req, res) => {
   );
 });
 
+
+// Utilise le routeur `aproposRouter` pour gérer les requêtes à la racine (`/`)
+app.use('/', aproposRouter);
+app.use('/programmeTv', programmeTvRouter);
+app.use('/formulaireProgrammeTv', formulaireProgrammeTvRouter);
 
 
 // Exportation de l'application pour utilisation dans d'autres fichiers
