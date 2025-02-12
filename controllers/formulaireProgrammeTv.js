@@ -10,18 +10,10 @@ module.exports = {
   let requeteSQL;
   let ordreDonnees;
 
-  if (err) {
-      id = null; // Aucun ID, donc insertion
-      requeteSQL = "INSERT INTO programmediffusion (titre, heure_debut, heure_fin, lien_youtube) VALUES (?, ?, ?, ?)";
-      ordreDonnees = [titre, heure_debut, heure_fin, lien_youtube]; // Correction du tableau
-  } else {
-      // Mise à jour d'un programme existant
-      requeteSQL = "UPDATE programmediffusion SET titre = ?, heure_debut = ?, heure_fin = ?, lien_youtube = ? WHERE id = ?";
-      ordreDonnees = [titre, heure_debut, heure_fin, lien_youtube, id];
-  }
+  res.render("formulaireProgrammeTv");
 
   // Connexion à la base pour exécuter la requête
-  req.getConnection((err, connection) => {
+  /*req.getConnection((err, connection) => {
       if (err) {
           console.log("Erreur de connexion à la base de données:", err);
       }
@@ -34,6 +26,6 @@ module.exports = {
           console.log("Opération réussie !");
           res.status(300).redirect("/programmeTv"); // Redirection vers la liste des programmes après ajout/mise à jour
       });
-  });
+  });*/
    }
 }

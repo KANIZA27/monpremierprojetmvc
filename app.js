@@ -7,15 +7,21 @@ const mysql2 = require("mysql2"); // Module pour se connecter à une base de don
 const myConnection = require("express-myconnection"); // Middleware pour gérer les connexions MySQL dans Express
 // Importe le module `express-myconnection` qui permet de gérer les connexions MySQL avec Express
 const connection = require("express-myconnection");
-
+//const bcrypt = require('bcrypt');
 // Importe le routeur `aproposRouter` depuis le fichier `routes/apropos.js`
 // Ce routeur gère les routes liées à la page "À propos"
-const aproposRouter = require("./routes/apropos");
+const aproposRoutes = require("./router/apropos");
 
 // Importe le routeur `programmeTvRouter` depuis le fichier `routes/programmeTv.js`
-// Ce routeur gère les routes liées à la page "Programme TV"
-const programmeTvRouter = require('./routes/programmeTv'); 
-const formulaireProgrammeTvRouter = require('./routes/formulaireProgrammeTv');
+
+const programmeTvRoutes = require('./router/programmeTv'); // Ce routeur gère les routes liées à la page "Programme TV"
+// Importation des routeurs
+const formulaireProgrammeTvRoutes = require('./router/formulaireProgrammeTv');
+// Importe les routes définies dans le fichier 'login.js' pour gérer les demandes liées à la connexion des utilisateurs
+const loginRoutes = require('./router/login'); 
+const signupRoutes = require('./router/signup');
+
+
 
 
 
@@ -49,127 +55,154 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 
-
-app.get("/formulaireProgrammeTv", (req, res) => {
+// Route GET pour afficher le formulaire d'ajout de programme TV
+/*app.get("/formulaireProgrammeTv", (req, res) => {
   res.render("formulaireProgrammeTv");
-});
-
+});*/
+/*
 // Route pour afficher le formulaire d'ajout de programme TV
 // Route pour gérer l'ajout d'unformulaire programme TV
+// Route POST pour ajouter un programme TV
 app.post("/formulaireProgrammeTv", (req, res) => {
+  const { titre, heure_debut, heure_fin, video } = req.body; // Récupération des données du formulaire
 
-  console.log("Corps de la requête Body:", req.body);       // Debug : affiche les données envoyées
-  console.log("titre:", req.body.titre);                   // Debug : affiche le titre
-  console.log("heure_debut:", req.body.heure_debut);       // Debug : affiche l'heure de début
-  console.log("heure_fin:", req.body.heure_fin);           // Debug : affiche l'heure de fin
-  console.log("lien_youtube:", req.body.lien_youtube);     // Debug : affiche le lien YouTube
-
-  let titre = req.body.titre; // Correction de "titer" en "titre"
-  let heure_debut = req.body.heure_debut;
-  let heure_fin = req.body.heure_fin;
-  let lien_youtube = req.body.lien_youtube;
-
-  let id = req.body.id;
-  let requeteSQL;
-  let ordreDonnees;
-
-  if (err) {
-      id = null; // Aucun ID, donc insertion
-      requeteSQL = "INSERT INTO programmediffusion (titre, heure_debut, heure_fin, lien_youtube) VALUES (?, ?, ?, ?)";
-      ordreDonnees = [titre, heure_debut, heure_fin, lien_youtube]; // Correction du tableau
-  } else {
-      // Mise à jour d'un programme existant
-      requeteSQL = "UPDATE programmediffusion SET titre = ?, heure_debut = ?, heure_fin = ?, lien_youtube = ? WHERE id = ?";
-      ordreDonnees = [titre, heure_debut, heure_fin, lien_youtube, id];
+  if (!titre || !heure_debut || !heure_fin || !video) {
+    return res.status(400).send("Veuillez remplir tous les champs.");
   }
 
-  // Connexion à la base pour exécuter la requête
+  // Connexion à la base de données
   req.getConnection((err, connection) => {
+    if (err) {
+      console.error("Erreur de connexion à la base de données:", err);
+      return res.status(500).send("Erreur serveur");
+    }
+
+    const requeteSQL = "INSERT INTO programmediffusion (titre, heure_debut, heure_fin, lien_youtube) VALUES (?, ?, ?, ?)";
+    const ordreDonnees = [titre, heure_debut, heure_fin, video];
+
+    connection.query(requeteSQL, ordreDonnees, (err, result) => {
       if (err) {
-          console.log("Erreur de connexion à la base de données:", err);
+        console.error("Erreur SQL:", err);
+        return res.status(500).send("Erreur lors de l'ajout du programme TV");
       }
 
-      connection.query(requeteSQL, ordreDonnees, (err, result) => {
-          if (err) {
-              console.log("Erreur lors de l'exécution de la requête SQL:", err);
-          }
-
-          console.log("Opération réussie !");
-          res.status(300).redirect("/programmeTv"); // Redirection vers la liste des programmes après ajout/mise à jour
-      });
+      console.log("Programme TV ajouté avec succès !");
+      res.redirect("/programmeTv");
+    });
   });
-});
+});*/
 
-
-app.get("/login", (req, res) => {
+/*app.get("/login", (req, res) => {
   res.render("login"); // Il doit chercher 'views/login.ejs'
-});
+});*/
 
 
 // Route POST pour gérer la connexion des utilisateurs
-app.post('/login', async (req, res) => {
-  // Récupération des données envoyées par le formulaire de connexion (email et mot de passe)
-        const { email, password } = req.body;
+// Route POST pour traiter la connexion utilisateur
+/*app.post("/login", (req, res) => {
 
-  // Requête SQL pour rechercher l'utilisateur correspondant à l'email fourni
-  connection.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-      if (err) throw err; // En cas d'erreur SQL, on arrête l'exécution et affiche l'erreur
+    const email.req.body.email;
+    const password.req.body.password;
 
-      // Vérifier si un utilisateur correspondant à l'email a été trouvé
-      if (results.length > 0) {
-        const user = results[0]; // Récupération du premier utilisateur trouvé
+  if (!email || !password) {
+    return res.status(400).send("Veuillez remplir tous les champs.");
+  }
 
-          // Comparaison du mot de passe saisi avec le mot de passe hashé stocké en base de données
-        const validPassword = await bcrypt.compare(password, user.password);
+  // Connexion à la base de données
+  req.getConnection((err, connection) => {
+    if (err) {
+      console.error("Erreur de connexion à la base de données:", err);
+      return res.status(500).send("Erreur serveur");
+    }
 
-          if (validPassword) {
-              // Si le mot de passe est valide, on stocke l'ID de l'utilisateur en session
-              req.session.userId = user.id;
-              
-              // Réponse envoyée à l'utilisateur indiquant une connexion réussie
-              res.send('Connexion réussie ! <a href="/dashboard">Accéder au dashboard</a>');
-          } else {
-              // Si le mot de passe est incorrect, on affiche un message d'erreur
-              res.send('Mot de passe incorrect.');
-          }
-      } else {
-          // Si aucun utilisateur n'est trouvé avec cet email, on affiche un message d'erreur
-          res.send('Email non trouvé.');
+    const sql = "SELECT * FROM utilisateur WHERE email = ?";
+    connection.query(sql, [email], async (err, results) => {
+      if (err) {
+        console.error("Erreur SQL:", err);
+        return res.status(500).send("Erreur serveur");
       }
+
+      if (results.length === 0) {
+        return res.status(401).send("Email non trouvé.");
+      }
+
+      const user = results[0];
+
+      // Vérification du mot de passe hashé
+      const validPassword = await bcrypt.compare(password, user.password);
+      if (!validPassword) {
+        return res.status(401).send("Mot de passe incorrect.");
+      }
+
+      // Enregistrement de l'utilisateur en session
+      req.session.userId = user.id;
+      req.session.email = user.email;
+
+      res.redirect("/programmeTv");
+    });
   });
-});
+});*/
 
-
-app.get("/signup", (req, res) => {
+/*app.get("/signup", (req, res) => {
     res.render("signup"); // Il doit chercher 'views/signup.ejs'
-});
+});*/
 
 // Route POST pour gérer l'inscription des utilisateurs
-app.post('/signup', async (req, res) => {
-  // Récupération des données envoyées par le formulaire d'inscription
-      const { nom, prenom, email, datenaissance, motdepasse } = req.body;
+/*app.post("/signup", async (req, res) => {
+  // Récupération des valeurs du formulaire envoyé par l'utilisateur
+   const nom = req.body.nom; // Récupère la valeur du champ "nom" dans la requête HTTP
+   const prenom = req.body.prenom; // Récupère la valeur du champ "prenom" dans la requête HTTP
+   const email = req.body.email; // Récupère la valeur du champ "email" dans la requête HTTP
+   const dateNaissance = req.body.dateNaissance; // Récupère la valeur du champ "dateNaissance" dans la requête HTTP
+   const motdePasse = req.body.motdePasse; // Récupère la valeur du champ "motdePasse" dans la requête HTTP
 
-  // Hachage du mot de passe avant de le stocker en base de données pour des raisons de sécurité
-      const hashedPassword = await bcrypt.hash(motdepasse, 10);
+// Vérification si tous les champs sont remplis
+  if (!nom || !prenom || !email || !dateNaissance || !motdePasse) {
+    return res.status(400).send("Veuillez remplir tous les champs."); // Retourne une erreur si un champ est manquant
+  }
 
-  // Exécution de la requête SQL pour insérer un nouvel utilisateur dans la table `users`
-  connection.query(
-      'INSERT INTO users (nom, prenom, email, dob, password) VALUES (?, ?, ?, ?, ?)',
-      [nom, prenom, email, date_naissance, hashedPassword], // Les valeurs à insérer dans la requête SQL
-      (err, result) => {
-          if (err) throw err; // En cas d'erreur SQL, on affiche l'erreur et on arrête l'exécution
+  // Hashage du mot de passe avant de le stocker dans la base de données
+  const hashedPassword = await bcrypt.hash(motdePasse, 10);
 
-          // Message de confirmation d'inscription avec un lien vers la page de connexion
-          res.send('Inscription réussie ! <a href="/login">Se connecter</a>');
+  // Connexion à la base de données 
+  req.getConnection((err, connection) => {
+    if (err) {
+      console.error("Erreur de connexion à la base de données:", err); // Affichage de l'erreur dans la console
+      return res.status(500).send("Erreur serveur"); // Retourne une erreur au client
+    }
+
+    // Requête SQL pour insérer un nouvel utilisateur dans la base de données
+    const sql = "INSERT INTO utilisateur (nom, prenom, email, dateNaissance, motdePasse) VALUES (?, ?, ?, ?, ?)";
+    const values = [nom, prenom, email, dateNaissance, hashedPassword];
+
+    // Exécution de la requête SQL
+    connection.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Erreur SQL:", err); // Affichage de l'erreur SQL dans la console
+        return res.status(500).send("Erreur lors de l'inscription"); // Retourne une erreur au client
       }
-  );
-});
+
+      // Message de succès après une inscription réussie
+      res.send('Inscription réussie ! <a href="/login">Se connecter</a>');
+    });
+  });
+});*/
 
 
 // Utilise le routeur `aproposRouter` pour gérer les requêtes à la racine (`/`)
-app.use('/', aproposRouter);
-app.use('/programmeTv', programmeTvRouter);
-app.use('/formulaireProgrammeTv', formulaireProgrammeTvRouter);
+app.use('/', aproposRoutes); // Charge les routes pour la gestion du programme TV à partir de la racine "/"
+// Exemple : si "programmeTvRoutes" contient "/programme", alors la page sera accessible via "/programme"
+
+app.use('/', programmeTvRoutes); // Charge les routes pour la gestion du programme TV à partir de la racine "/"
+// Exemple : si "programmeTvRoutes" contient "/programme", alors la page sera accessible via "/programme"
+
+app.use('/', formulaireProgrammeTvRoutes); // Charge les routes liées au formulaire pour ajouter/modifier des programmes TV
+
+app.use('/', loginRoutes); // Charge les routes liées à la connexion des utilisateurs
+// Exemple : "/login" affichera la page de connexion définie dans "loginRoutes"
+
+app.use('/',signupRoutes); // Charge les routes liées à l'inscription des utilisateurs
+// Exemple : "/signup" affichera la page d'inscription définie dans "signupRoutes"
 
 
 // Exportation de l'application pour utilisation dans d'autres fichiers

@@ -8,7 +8,7 @@ const programmetvControllers = require('../controllers/programmeTv');
 const router = express.Router(); 
 
 // Définit une route GET sur la racine `/`, qui appelle la fonction `programmetvView` du contrôleur
-router.get('/', programmetvControllers.programmeTvView);
+router.get('/programmeTv', programmetvControllers.programmeTvView);
 
 // Exporte le routeur pour pouvoir l'utiliser dans d'autres parties de l'application, comme `app.js`
 module.exports = router;

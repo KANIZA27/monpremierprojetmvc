@@ -7,8 +7,8 @@ const formulaireProgrammeTvControllers = require('../controllers/formulaireProgr
 // Ici, je crée une nouvelle instance de routeur Express pour gérer les routes liées à "formulaireProgrammeTv"
 const router = express.Router(); 
 
-//  Je définit une route GET sur la racine (`/`), qui appelle la fonction `formulaireProgrammeTvView` du contrôleur
-router.post('/formulaireProgrammeTv', formulaireProgrammeTvControllers.formulaireProgrammeTvView);
+//  Je définit une route GET sur la racine (`/`), qui appelle la fonction `formulaireProgrammeTvView` du contrôle
+router.get('/formulaireProgrammeTv', formulaireProgrammeTvControllers.formulaireProgrammeTvView);
 
 // Exporte le routeur pour pouvoir l'utiliser dans d'autres parties de l'application, comme `app.js`
 module.exports = router;
