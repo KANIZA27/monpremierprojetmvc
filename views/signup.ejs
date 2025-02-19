@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
     <link rel="stylesheet" href="/css/signup.css"> <!-- Lien vers le CSS -->
+    <link rel="stylesheet" href="css/navbar.css">
+
 </head>
 <body>
+    <%- include('navbar') %> <!-- Inclusion de la barre de navigation depuis un fichier partiel -->
+
     <main>
         <h2>Inscription</h2>
         <p>Déjà un compte ? <a href="/login">Se connecter</a></p> <!-- Lien vers connexion -->
@@ -22,16 +26,21 @@
             <label for="email">Email :</label>
             <input type="email" name="email" required> <!-- Champ Email -->
     
-            <label for="dateNaissance">Date de naissance :</label>
-            <input type="date" name="dateNaissance" required> <!-- Champ Date de naissance -->
+            <label for="date_naissance">Date de naissance :</label>
+            <input type="date" name="date_naissance" required> <!-- Champ Date de naissance -->
     
-            <label for="motdePasse">Mot de passe :</label>
-            <input type="motdePasse" name="motdePasse" required> <!-- Champ Mot de passe -->
+            <label for="mot_de_passe">Mot de passe :</label>
+            <input type="password" name="mot_de_passe" required> <!-- Champ Mot de passe -->
+ 
     
             <button type="submit">S'inscrire</button> <!-- Bouton Inscription -->
         </form>
     
     </main>
+    <!-- Pied de page -->
+<%- include('footer') %> <!-- Inclusion du pied de page -->
+
+
 </body>
 </html>
 

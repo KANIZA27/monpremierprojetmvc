@@ -1,81 +1,101 @@
-/* Style général */
+/* Styles pour la page d'inscription */
+
+/* Définition du style général du corps de la page */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: Arial, sans-serif; /* Utilisation d'une police lisible */
+    margin: 0; /* Suppression des marges par défaut */
+    padding: 0; /* Suppression des espaces intérieurs par défaut */
+    background-color: #f4f4f4; /* Couleur de fond légère */
+    text-align: center; /* Centrage du texte */
 }
 
-/* Conteneur principal */
+/* Style de la barre de navigation */
+nav {
+    background-color: #333; /* Couleur de fond foncée */
+    padding: 15px; /* Ajout de rembourrage autour du contenu */
+}
+
+/* Style de la liste de navigation */
+nav ul {
+    list-style-type: none; /* Suppression des puces */
+    padding: 0; /* Suppression des rembourrages */
+    margin: 0; /* Suppression des marges */
+    display: flex; /* Utilisation de flexbox pour aligner les éléments */
+    justify-content: center; /* Centrage des éléments de la liste */
+}
+
+/* Style des éléments de la liste de navigation */
+nav ul li {
+    margin: 0 15px; /* Espacement entre les éléments */
+}
+
+/* Style des liens de navigation */
+nav ul li a {
+    color: white; /* Couleur du texte */
+    text-decoration: none; /* Suppression du soulignement */
+    font-size: 18px; /* Taille de police augmentée */
+}
+
+/* Style du conteneur principal */
 main {
-    text-align: center;
-    margin-bottom: 20px;
+    margin: 50px auto; /* Centrage avec marge extérieure */
+    width: 300px; /* Largeur fixe du formulaire */
+    padding: 20px; /* Ajout d'un rembourrage intérieur */
+    background-color: white; /* Fond blanc pour contraste */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    border-radius: 5px; /* Coins arrondis */
 }
 
+/* Style du titre principal */
 h2 {
-    color: #333;
+    font-size: 24px; /* Taille de police agrandie */
+    color: #333; /* Couleur du texte */
 }
 
-/* Liens */
-p {
-    font-size: 14px;
-    color: #555;
-}
-
-p a {
-    color: blue;
-    text-decoration: none;
-}
-
-p a:hover {
-    text-decoration: underline;
-}
-
-/* Formulaire */
+/* Style du formulaire */
 form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Utilisation de flexbox pour structurer */
+    flex-direction: column; /* Organisation en colonne */
 }
 
-/* Labels */
+/* Style des étiquettes du formulaire */
 label {
-    font-weight: bold;
-    margin-top: 10px;
-    color: #555;
+    text-align: left; /* Alignement à gauche */
+    margin-bottom: 5px; /* Espacement sous chaque label */
+    font-weight: bold; /* Texte en gras */
 }
 
-/* Champs de saisie */
+/* Style des champs de saisie */
 input {
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+    padding: 10px; /* Ajout de rembourrage intérieur */
+    margin-bottom: 15px; /* Espacement entre les champs */
+    border: 1px solid #ccc; /* Bordure légère */
+    border-radius: 5px; /* Coins arrondis */
 }
 
-/* Bouton d'inscription */
+/* Style du bouton d'envoi */
 button {
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: #333; /* Couleur de fond foncée */
+    color: white; /* Texte blanc */
+    padding: 10px; /* Ajout de rembourrage */
+    border: none; /* Suppression des bordures */
+    cursor: pointer; /* Curseur en pointeur au survol */
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 16px; /* Taille de police augmentée */
 }
 
+/* Changement de couleur au survol du bouton */
 button:hover {
-    background-color: black;
+    background-color: #555; /* Légère variation de couleur */
 }
+
+/* Style du pied de page (commenté) */
+/*footer {
+    background-color: #333; // Couleur de fond foncée 
+    color: white; // Couleur du texte 
+    text-align: center; // Alignement du texte au centre 
+    padding: 15px; // Ajout de rembourrage 
+    position: absolute; // Positionnement fixe en bas 
+    bottom: 0; // Alignement en bas de la page 
+    width: 100%; // Largeur pleine 
+}*/

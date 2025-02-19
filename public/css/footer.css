@@ -1,0 +1,33 @@
+/* Style global du footer */
+footer {
+    background-color: #222;       /* Fond sombre */
+    color: rgb(6, 90, 38);                 /* Texte en blanc */
+    text-align: center;
+    padding: 20px 0;              /* Espace vertical autour du contenu */
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+/* Conteneur principal du footer avec espacement entre les éléments */
+.footer-container {
+    display: flex;
+    flex-direction: column;       /* Affichage en colonne pour empiler les éléments */
+    align-items: center;          /* Centrer horizontalement */
+    gap: 15px;                    /* Espace entre chaque élément (paragraphe et navigation) */
+}
+
+/* Style des liens de navigation dans le footer */
+.footer-nav a {
+    color: #f4a261;               /* Couleur orangée pour les liens */
+    text-decoration: none;
+    margin: 0 15px;               /* Espace horizontal entre les liens */
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Effet hover sur les liens */
+.footer-nav a:hover {
+    color: #e76f51;              /* Changement de couleur au survol */
+    text-decoration: underline; /* Soulignement lors du survol */
+}

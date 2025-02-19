@@ -1,0 +1,65 @@
+/* navbar.css */
+
+/* Réinitialisation des styles de base */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Barre de navigation */
+nav {
+    background-color: #2c3e50;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+nav ul li a i {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    background-color: #34495e;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    nav ul li a {
+        display: inline-block;
+        width: 100%;
+        padding: 12px;
+    }
+}

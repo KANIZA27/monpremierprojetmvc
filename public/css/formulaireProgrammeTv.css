@@ -83,9 +83,4 @@ button:hover {
   background-color: black;
 }
 
-/* Responsive (mobile) */
-@media (max-width: 768px) {
-  main {
-      width: 90%;
-  }
-}
+

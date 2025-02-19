@@ -1,30 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> <!-- Définition de l'encodage des caractères pour supporter les caractères spéciaux -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Permet l'adaptabilité sur les différents écrans -->
-    <link href="css/programmeTv.css" rel="stylesheet"> <!-- Lien vers le fichier CSS externe pour le style -->
-    <title>chaîne TV</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    <meta charset="UTF-8"> <!-- Définition de l'encodage des caractères -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptabilité sur les écrans -->
+    <link href="css/programmeTv.css" rel="stylesheet"> <!-- Lien vers le CSS externe -->
+    <link rel="stylesheet" href="css/navbar.css">
+
+    <title>Chaîne TV</title> <!-- Titre de l'onglet du navigateur -->
 </head>
-
 <body>
+  <%- include('navbar') %> <!-- Inclusion de la barre de navigation -->
   <main>
-    <%- include('navbar') %> <!-- Inclusion de la barre de navigation -->
-    <h1>Programme TV</h1> <!-- Titre principal de la page -->
+    
+    <h1>Programme TV</h1> <!-- Titre principal -->
     <p>Découvrez nos programmes culturels.</p> <!-- Description de la page -->
-    <!-- Liste des programmes à ajouter dynamiquement -->
+    
+    <!-- Liste des programmes affichés dynamiquement -->
     <ul>
-      <img src="" alt="" class=""> <!-- Image illustrative du programme TV -->
-      <% programmediffusion.forEach(programme => { %> <!-- Boucle pour afficher dynamiquement les programmes TV -->
-        <iframe width="560" height="315" 
-          src="https://www.youtube.com/embed/DqwI5WsAsn8?enablejsapi=1" >
-        </iframe>
+      <% programmediffusion.forEach(programme => { %>
+        <li>
+          <!-- Première vidéo -->
+          <iframe width="560" height="315"
+                  src="https://www.youtube.com/embed/ZKeMRVw3V-A?pp=ygUHQ2hpZ29tYQ%3D%3D"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+          </iframe>
+          
+          <!-- Seconde vidéo -->
+          <iframe width="560" height="315"
+                  src="https://www.youtube.com/embed/9sdex0k3jhg?si=o31oYip_B5wzs04S"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+          </iframe>
 
-        <li><%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %></li> <!-- Affichage des détails de chaque programme -->
+          <!-- Troisième vidéo -->
+          <iframe width="560" height="315"
+                  src="https://www.youtube.com/embed/68dwGIq35q0?si=6H8kUTQVm4tEeJWZ"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+          </iframe>
+
+          <!-- Quatrième vidéo ajoutée -->
+          <iframe width="560" height="315"
+                  src="https://www.youtube.com/embed/_95yYcAuMsQ?si=VeFH5bYdZc8urtB7"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+          </iframe>
+          
+          <!-- Affichage des informations du programme -->
+          <p>
+            <%= programme.titre %> - <%= programme.heure_debut %> - <%= programme.heure_fin %>
+          </p>
+        </li>
       <% }) %>
     </ul>
-    <%- include('footer') %> <!-- Inclusion unique du footer -->
-</main>
-
+  </main>
 </body>
 </html>
